@@ -24,7 +24,7 @@ public class ListDataActivity extends AppCompatActivity {
 
     private ListView mListView;
 
-    protected void onCreate(@Nullable Bundle savedInstanceState){
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_layout);
         mListView = (ListView) findViewById(R.id.listView);
@@ -38,20 +38,19 @@ public class ListDataActivity extends AppCompatActivity {
 
         //get Data and append to a List
         Cursor data = mDatabaseHelper.getData();
-        ArrayList<String> listData = new ArrayList<>();
-        while(data.moveToNext()){
+        ArrayList<String> listWord = new ArrayList<>();
+        //ArrayList<String> listMeaning = new ArrayList<>();
+        while (data.moveToNext()) {
             //get value from database in column 1
             //then add it to arraylist
-            listData.add(data.getString(1)); //COLUMN 1 contains words
+            listWord.add(data.getString(1)); //COLUMN 1 contains words
+            // listMeaning.add(data.getString(2));
         }
-        //create the list adapter and set the adapter
-        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
-        mListView.setAdapter(adapter);
     }
 
+        //customizable toast
 
-    //customizable toast
-    private void toastMessage(String message){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT ).show();
+    private void toastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
