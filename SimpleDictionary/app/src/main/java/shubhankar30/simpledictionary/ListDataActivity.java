@@ -41,9 +41,6 @@ public class ListDataActivity extends AppCompatActivity {
         wordList = new ArrayList<>();
         Cursor data = mDatabaseHelper.getData();
         int numRows = data.getCount();
-
-        String string;
-
         if (numRows == 0) {
             toastMessage("Nothing in database");
         } else {
@@ -51,9 +48,9 @@ public class ListDataActivity extends AppCompatActivity {
                 words = new WordList(data.getString(1), data.getString(2));
                 wordList.add(words); //COLUMN 1 contains words
             }
-            CustomAdapter adapter = new CustomAdapter(this, android.R.layout.list_adapter, wordList);
+            CustomAdapter adapter = new CustomAdapter(this, R.layout.custom_list_adapter, wordList);
 
-            //ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listWord);
+            //ListAdapter adapter = new ArrayAdapter<>(this, R.layout.simple_list_item_1, listWord);
             mListView.setAdapter(adapter);
         }
     }
