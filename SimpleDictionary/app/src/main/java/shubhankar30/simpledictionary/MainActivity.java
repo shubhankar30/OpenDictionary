@@ -50,19 +50,12 @@ public class MainActivity extends AppCompatActivity {
         btnViewData = (Button) findViewById(R.id.btnView);
         mDatabaseHelper = new DatabaseHelper(this);
 
-
-
-
-
-
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //CODE FOR DATABASE ENTRY
                 String newEntry = editText.getText().toString();
                 if(editText.length()!= 0){
-                    addData(newEntry);
+                    queryData(newEntry);
                     editText.setText("");
                 }else {
                     toastMessage("You must put something in the text field");
@@ -79,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void queryData(String data){
+    public void queryData(final String data){
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String URL = "https://owlbot.info/api/v2/dictionary/" + data +"?format=json";
@@ -97,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 JSONObject currentJsonObj = response.getJSONObject(i);
                                 meaningOfWord = currentJsonObj.getString("definition");
-                                addMeaning(meaningOfWord);
+                                addRow(data, meaningOfWord); //function call
                                 Log.e("Checking meaning",meaningOfWord);
                                 Log.e("Rest Response:", response.toString());
                             } catch (JSONException e) {
@@ -119,35 +112,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void addData(String newEntry) {
-        boolean insertData = mDatabaseHelper.addData(newEntry);
+    public void addRow(String word, String meaning){
+        boolean success = mDatabaseHelper.addRow(word, meaning);
 
-        if (insertData) {
-            toastMessage("Data successfully inserted");
-            queryData(newEntry);
-        } else {
-            toastMessage("Error in inserting data");
-        }
-    }
-
-    public void addMeaning(String newMeaning){
-        boolean insertMeaning = mDatabaseHelper.addMeaning(newMeaning);
-
-        if(insertMeaning){
-            Log.e("MEANING ", "ADDED");
-        } else {
-            Log.e("MEANING UNSUCCESSFULL","");
+        if(success) {
+            Log.e("ROW ADDED", "SUCCESSFULLY"); //debug
+        }else {
+            Log.e("ROW ADDED", "FAILED"); //debug
         }
     }
 
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-
-
-    //CODE FOR REST API
-
-
-
 }
 
