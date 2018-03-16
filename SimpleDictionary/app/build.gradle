@@ -27,5 +27,4 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.google.code.gson:gson:2.8.1'
-    debugImplementation 'com.amitshekhar.android:debug-db:1.0.3'
 }
