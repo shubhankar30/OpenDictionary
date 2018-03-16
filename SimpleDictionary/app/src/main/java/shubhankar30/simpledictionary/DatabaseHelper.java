@@ -15,11 +15,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
 
-    private static final String TABLE_NAME = "table_words";
+    private static final String TABLE_NAME = "table_words_10";
     private static final String COL1 = "ID";
     private static final String COL2 = "word";
     private static final String COL3 = "meaning";
-
 
     public DatabaseHelper(Context context){
         super(context, TABLE_NAME, null, 1);
@@ -40,36 +39,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addData(String item){
+
+    public boolean addRow(String word, String meaning){
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL2, item);
+        ContentValues cv = new ContentValues();
+        cv.put(COL2, word);
+        cv.put(COL3, meaning);
 
-        Log.d(TAG, "addData: Adding " + item + " to " + COL2);
+        Log.d(TAG, "addRow: Adding:" + word + " to " + COL2 + " and " + meaning + " to " + COL3); //debug
 
-        long result = db.insert(TABLE_NAME, null, contentValues);
+        long testResult = db.insert(TABLE_NAME, null, cv);
 
-        //if data is inserted correctly  it will return -1
-        if( result==-1){
+        if(testResult == -1) {
             return false;
-        } else {
-            return true;
-        }
-    }
-
-    public boolean addMeaning (String item){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL3,item);
-
-        Log.d(TAG, "addData: ADding" + item + " to " + COL3);
-
-        long result = db.insert(TABLE_NAME,null,contentValues);
-
-        //if data is inserted correctly  it will return -1
-        if( result==-1){
-            return false;
-        } else {
+        } else{
             return true;
         }
     }
