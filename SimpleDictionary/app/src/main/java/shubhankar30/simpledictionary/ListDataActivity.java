@@ -19,6 +19,8 @@ import java.util.ArrayList;
 public class ListDataActivity extends AppCompatActivity {
 
     private static final String TAG = "ListDataActivity";
+    ArrayList<WordList> wordList;
+    WordList words;
 
     DatabaseHelper mDatabaseHelper;
 
@@ -36,18 +38,25 @@ public class ListDataActivity extends AppCompatActivity {
     private void populateListView() {
         Log.d(TAG, "populateListView: Displaying data in ListView");
 
-        //get Data and append to a List
+        wordList = new ArrayList<>();
         Cursor data = mDatabaseHelper.getData();
-        ArrayList<String> listWord = new ArrayList<>();
-        //ArrayList<String> listMeaning = new ArrayList<>();
-        while (data.moveToNext()) {
-            //get value from database in column 1
-            //then add it to arraylist
-            listWord.add(data.getString(1)); //COLUMN 1 contains words
-            // listMeaning.add(data.getString(2));
+        int numRows = data.getCount();
+
+        String string;
+
+        if (numRows == 0) {
+            toastMessage("Nothing in database");
+        } else {
+            while (data.moveToNext()) {
+                words = new WordList(data.getString(1), data.getString(2));
+                wordList.add(words); //COLUMN 1 contains words
+            }
+            CustomAdapter adapter = new CustomAdapter(this, android.R.layout.list_adapter, wordList);
+
+            //ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listWord);
+            mListView.setAdapter(adapter);
         }
     }
-
         //customizable toast
 
     private void toastMessage(String message) {
