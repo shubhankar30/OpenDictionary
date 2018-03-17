@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class ListDataActivity extends AppCompatActivity {
     ArrayList<WordList> wordList;
     WordList words;
 
+
     DatabaseHelper mDatabaseHelper;
 
     private ListView mListView;
@@ -34,6 +36,16 @@ public class ListDataActivity extends AppCompatActivity {
         mDatabaseHelper = new DatabaseHelper(this);
 
         populateListView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.list_layout);
+        mListView = (ListView) findViewById(R.id.listView);
+        mDatabaseHelper = new DatabaseHelper(this);
+        populateListView();
+        toastMessage("Activity refreshed");
     }
 
     private void populateListView() {
@@ -56,8 +68,12 @@ public class ListDataActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String name = adapterView.getItemAtPosition(i).toString();
+                // String name = adapterView.getItemAtPosition(i).toString();
+
+                String name = ((TextView) view.findViewById(R.id.wordId)).getText().toString();
+
                 Log.d(TAG, "onItemClick: You clicked" + name);
+                //toastMessage("Pressed " + debug_1);
 
                 Cursor data = mDatabaseHelper.getItemId(name);
                 int itemId = -1;
@@ -67,12 +83,14 @@ public class ListDataActivity extends AppCompatActivity {
                 if(itemId > -1){
                     Log.d(TAG, "onItemClick: ID is : " + itemId);
                     Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
-                    editScreenIntent.putExtra("id", itemId);
+
+                   // startActivityForResult(editScreenIntent, 1);
+
                     editScreenIntent.putExtra("name", name);
                     startActivity(editScreenIntent);
                 }
                 else{
-                    toastMessage("No ID associated with that name");
+                    toastMessage("No ID associated with " + name);
                 }
             }
         });

@@ -35,20 +35,28 @@ public class EditDataActivity extends AppCompatActivity{
 
         Intent receivedIntent = getIntent();
 
-        selectedId = receivedIntent.getIntExtra("id", -1); //-1 is default value
+        //selectedId = receivedIntent.getIntExtra("id", -1); //-1 is default value
 
         selectedName = receivedIntent.getStringExtra("name");
 
         word_item.setText(selectedName);
+        toastMessage("NAME ADDED:" + selectedName);
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mDatabaseHelper.deleteWord(selectedName);
-                word_item.setText("");
+                //word_item.setText("");
                 toastMessage("Word removed from database");
+                finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     //customizable toast
