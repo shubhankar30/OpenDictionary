@@ -67,7 +67,7 @@ public class EditDataActivity extends AppCompatActivity{
                 @Override
                 public void onClick(View view) {
                     mDatabaseHelper.deleteWord(selectedWord);
-                    toastMessage("Word removed from database");
+                    toastMessage("Word deleted");
                     finish();
                 }
             });

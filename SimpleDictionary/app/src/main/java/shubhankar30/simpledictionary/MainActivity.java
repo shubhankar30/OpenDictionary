@@ -53,12 +53,16 @@ public class MainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean wordPresent = false;
                 String newEntry = editText.getText().toString();
-                if(editText.length()!= 0){
+                wordPresent = mDatabaseHelper.checkIfPresent(newEntry);
+                if(editText.length()!= 0 && wordPresent == false){
                     queryData(newEntry);
                     editText.setText("");
-                }else {
-                    toastMessage("You must put something in the text field");
+                }else if( wordPresent == true){
+                    toastMessage("Word is already present in Dictionary");
+                } else{
+                    toastMessage("You must enter something in the text field");
                 }
             }
         });
@@ -87,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
                         for( int i=0 ; i<response.length();i++){
                             String meaningOfWord = null;
                             String exampleofWord = null;
-                            boolean wordPresent = false;
                             try {
                                 JSONObject currentJsonObj = response.getJSONObject(i);
                                 meaningOfWord = currentJsonObj.getString("definition"); //Get meaning from REST response
@@ -95,13 +98,9 @@ public class MainActivity extends AppCompatActivity {
                                 Log.e("Checking meaning",meaningOfWord);
                                 Log.e("Rest Response:", response.toString());
 
-                                wordPresent = mDatabaseHelper.checkIfPresent(data); //To prevent duplicate addition of words
-                                if(wordPresent == true){
-                                    toastMessage("Word is already present");
-                                }
-                                else if(wordPresent == false){
+
                                     addRow(data, meaningOfWord, exampleofWord); //function call
-                                }
+
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
