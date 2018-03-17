@@ -1,12 +1,13 @@
 package shubhankar30.simpledictionary;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -45,17 +46,39 @@ public class ListDataActivity extends AppCompatActivity {
             toastMessage("Nothing in database");
         } else {
             while (data.moveToNext()) {
-                words = new WordList(data.getString(1), data.getString(2));
-                wordList.add(words); //COLUMN 1 contains words
+                words = new WordList(data.getString(1), data.getString(2)); //COLUMN 1 contains words, COLUMN 2 contains meanings
+                wordList.add(words);
             }
             CustomAdapter adapter = new CustomAdapter(this, R.layout.custom_list_adapter, wordList);
-
-            //ListAdapter adapter = new ArrayAdapter<>(this, R.layout.simple_list_item_1, listWord);
             mListView.setAdapter(adapter);
         }
-    }
-        //customizable toast
 
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String name = adapterView.getItemAtPosition(i).toString();
+                Log.d(TAG, "onItemClick: You clicked" + name);
+
+                Cursor data = mDatabaseHelper.getItemId(name);
+                int itemId = -1;
+                while(data.moveToNext()){
+                    itemId = data.getInt(0);
+                }
+                if(itemId > -1){
+                    Log.d(TAG, "onItemClick: ID is : " + itemId);
+                    Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
+                    editScreenIntent.putExtra("id", itemId);
+                    editScreenIntent.putExtra("name", name);
+                    startActivity(editScreenIntent);
+                }
+                else{
+                    toastMessage("No ID associated with that name");
+                }
+            }
+        });
+    }
+
+    //Customizable toast
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
