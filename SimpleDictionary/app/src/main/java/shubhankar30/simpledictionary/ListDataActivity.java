@@ -68,12 +68,12 @@ public class ListDataActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // String name = adapterView.getItemAtPosition(i).toString();
+                //String name22 = adapterView.getItemAtPosition(i).toString();
 
-                String name = ((TextView) view.findViewById(R.id.wordId)).getText().toString();
+                String name = ((TextView) view.findViewById(R.id.meaningId)).getText().toString();
 
                 Log.d(TAG, "onItemClick: You clicked" + name);
-                //toastMessage("Pressed " + debug_1);
+                //toastMessage("Pressed " + name22);
 
                 Cursor data = mDatabaseHelper.getItemId(name);
                 int itemId = -1;

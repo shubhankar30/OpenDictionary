@@ -15,10 +15,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
 
-    private static final String TABLE_NAME = "table_words_15";
+    private static final String TABLE_NAME = "table_words_21";
     private static final String COL1 = "ID";
     private static final String COL2 = "word";
     private static final String COL3 = "meaning";
+    private static final String COL4 = "example";
 
     public DatabaseHelper(Context context){
         super(context, TABLE_NAME, null, 1);
@@ -28,7 +29,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY  AUTOINCREMENT," +
                 COL2 + " TEXT," +
-                COL3 + " TEXT)";
+                COL3 + " TEXT," +
+                COL4 + " TEXT)";
         db.execSQL(createTable);
 
     }
@@ -40,13 +42,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean addRow(String word, String meaning){
+    public boolean addRow(String word, String meaning, String example){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL2, word);
         cv.put(COL3, meaning);
+        cv.put(COL4, example);
 
-        Log.d(TAG, "addRow: Adding:" + word + " to " + COL2 + " and " + meaning + " to " + COL3); //debug
+        Log.d(TAG, "addRow: Adding:" + word + " to " + COL2 + " and " + meaning + " to " + COL3 + " and " + example + " to " + COL4); //debug
 
         long testResult = db.insert(TABLE_NAME, null, cv);
 
@@ -67,7 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getItemId(String name){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT " + COL1 + " FROM " + TABLE_NAME +
-                " WHERE " + COL2 + " = '" + name + "'";
+                " WHERE " + COL3 + " = '" + name + "'";
 
         Cursor data = db.rawQuery(query, null);
         return data;
@@ -80,7 +83,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.d(TAG, "deleting record" + name + "from database");
         db.execSQL(query);
+    }
 
+    public Cursor getRowInfo(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL2 + "," + COL4 + " FROM " + TABLE_NAME +
+                " WHERE " + COL3 + " = '" + name + "'";
+
+        Cursor data = db.rawQuery(query, null);
+        return data;
     }
 
 }
