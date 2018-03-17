@@ -60,6 +60,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean checkIfPresent(String word){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = null;
+        String query = "SELECT " + COL2 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + "='" + word + "'";
+        data = db.rawQuery(query,null);
+
+        if(data.getCount()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME;
@@ -93,5 +107,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor data = db.rawQuery(query, null);
         return data;
     }
+
+
 
 }

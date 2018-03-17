@@ -21,11 +21,9 @@ public class EditDataActivity extends AppCompatActivity{
     private TextView word_item;
     private TextView meaning_item;
     private TextView example_item;
-
     private String selectedMeaning;
     private String selectedWord;
     private String selectedExample;
-    private int selectedId;
 
     DatabaseHelper mDatabaseHelper;
 
@@ -44,28 +42,31 @@ public class EditDataActivity extends AppCompatActivity{
         Intent receivedIntent = getIntent();
 
         //selectedId = receivedIntent.getIntExtra("id", -1); //-1 is default value
-        selectedMeaning = receivedIntent.getStringExtra("name");
+        selectedMeaning = receivedIntent.getStringExtra("meaning");
 
-        //DB CALLS TO GET EXAMPLE and WORD
+        //Database calls to get example and word from meaning
         Cursor data = mDatabaseHelper.getRowInfo(selectedMeaning);
         if (data.getCount() >= 1) {
             while (data.moveToNext()) {
-                selectedExample = data.getString(1);
                 selectedWord = data.getString(0);
+                selectedExample = data.getString(1);
             }
-
         }
             word_item.setText(selectedWord);
             meaning_item.setText(selectedMeaning);
-            example_item.setText(selectedExample);
 
-            toastMessage("NAME ADDED:" + selectedMeaning);
+            if(selectedExample == null) { //If there is no example for specific word
+                example_item.setText(selectedExample);
+            }else{
+                example_item.setText("Example not available for this context");
+            }
+
+           // toastMessage("NAME ADDED:" + selectedMeaning); Debug
 
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mDatabaseHelper.deleteWord(selectedWord);
-                    //word_item.setText("");
                     toastMessage("Word removed from database");
                     finish();
                 }

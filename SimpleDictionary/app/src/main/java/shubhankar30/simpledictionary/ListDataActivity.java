@@ -39,13 +39,13 @@ public class ListDataActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume() { //To refresh the ListDataActivity page when user backtracks to Activity
         super.onResume();
         setContentView(R.layout.list_layout);
         mListView = (ListView) findViewById(R.id.listView);
         mDatabaseHelper = new DatabaseHelper(this);
         populateListView();
-        toastMessage("Activity refreshed");
+        //toastMessage("Activity refreshed"); Debug
     }
 
     private void populateListView() {
@@ -68,14 +68,12 @@ public class ListDataActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //String name22 = adapterView.getItemAtPosition(i).toString();
+                String meaning = ((TextView) view.findViewById(R.id.meaningId)).getText().toString();
 
-                String name = ((TextView) view.findViewById(R.id.meaningId)).getText().toString();
+                Log.d(TAG, "onItemClick: You clicked" + meaning);
+                //toastMessage("Pressed " + name22); Debug
 
-                Log.d(TAG, "onItemClick: You clicked" + name);
-                //toastMessage("Pressed " + name22);
-
-                Cursor data = mDatabaseHelper.getItemId(name);
+                Cursor data = mDatabaseHelper.getItemId(meaning);
                 int itemId = -1;
                 while(data.moveToNext()){
                     itemId = data.getInt(0);
@@ -84,13 +82,11 @@ public class ListDataActivity extends AppCompatActivity {
                     Log.d(TAG, "onItemClick: ID is : " + itemId);
                     Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
 
-                   // startActivityForResult(editScreenIntent, 1);
-
-                    editScreenIntent.putExtra("name", name);
+                    editScreenIntent.putExtra("meaning", meaning); //To send meaning of row to EditDataActivity
                     startActivity(editScreenIntent);
                 }
                 else{
-                    toastMessage("No ID associated with " + name);
+                    toastMessage("No ID associated with " + meaning);
                 }
             }
         });

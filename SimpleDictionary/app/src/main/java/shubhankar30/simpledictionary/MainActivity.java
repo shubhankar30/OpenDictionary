@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void queryData(final String data){
-
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String URL = "https://owlbot.info/api/v2/dictionary/" + data +"?format=json";
 
@@ -88,13 +87,22 @@ public class MainActivity extends AppCompatActivity {
                         for( int i=0 ; i<response.length();i++){
                             String meaningOfWord = null;
                             String exampleofWord = null;
+                            boolean wordPresent = false;
                             try {
                                 JSONObject currentJsonObj = response.getJSONObject(i);
-                                meaningOfWord = currentJsonObj.getString("definition");
-                                exampleofWord = currentJsonObj.getString("example");
-                                addRow(data, meaningOfWord, exampleofWord); //function call
+                                meaningOfWord = currentJsonObj.getString("definition"); //Get meaning from REST response
+                                exampleofWord = currentJsonObj.getString("example");    //Get example from REST response
                                 Log.e("Checking meaning",meaningOfWord);
                                 Log.e("Rest Response:", response.toString());
+
+                                wordPresent = mDatabaseHelper.checkIfPresent(data); //To prevent duplicate addition of words
+                                if(wordPresent == true){
+                                    toastMessage("Word is already present");
+                                }
+                                else if(wordPresent == false){
+                                    addRow(data, meaningOfWord, exampleofWord); //function call
+                                }
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -105,16 +113,14 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Rest Response:",error.toString());
-
+                        toastMessage("Please enter a valid word");
                     }
                 }
         );
-
         requestQueue.add(jsonarrayRequest);
-
     }
 
-    public void addRow(String word, String meaning, String example){
+    public void addRow(String word, String meaning, String example){ //Add Data to database
         boolean success = mDatabaseHelper.addRow(word, meaning, example);
 
         if(success) {
@@ -123,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e("ROW ADDED", "FAILED"); //debug
         }
     }
+
 
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
