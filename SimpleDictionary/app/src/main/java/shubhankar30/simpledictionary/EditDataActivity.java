@@ -56,9 +56,9 @@ public class EditDataActivity extends AppCompatActivity{
             meaning_item.setText(selectedMeaning);
 
             if(selectedExample == null) { //If there is no example for specific word
-                example_item.setText(selectedExample);
-            }else{
                 example_item.setText("Example not available for this context");
+            }else{
+                example_item.setText(selectedExample);
             }
 
            // toastMessage("NAME ADDED:" + selectedMeaning); Debug
