@@ -3,21 +3,77 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/word_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/meaning_item"
+        android:layout_alignLeft="@+id/meaning_item"
+        android:layout_alignRight="@+id/meaning_item"
+        android:layout_alignStart="@+id/meaning_item"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="12dp"
+        android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/meaning_item"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/word_item"
         android:layout_centerHorizontal="true"
-        android:id="@+id/word_item"
-        android:layout_marginTop="78dp"
-        />
+        android:layout_marginTop="46dp"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/example_item"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/meaning_item"
+        android:layout_alignStart="@+id/meaning_item"
+        android:layout_below="@+id/textView6"
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/word_item"
+        android:layout_above="@+id/textView7"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
+        android:layout_marginBottom="18dp"
         android:text="DELETE" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignStart="@+id/textView6"
+        android:layout_below="@+id/word_item"
+        android:layout_marginTop="15dp"
+        android:text="Meaning"
+        android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Example"
+        android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Developed by Shubhankar Ranade" />
 
 </RelativeLayout>

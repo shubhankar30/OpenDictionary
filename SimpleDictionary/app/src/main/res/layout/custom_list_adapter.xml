@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="100">
+    android:gravity="left"
+    android:orientation="horizontal"
+    >
 
     <TextView
         android:id="@+id/wordId"
-        android:layout_width="35dp"
-        android:layout_height="60dp"
-        android:layout_weight="30"
+        android:layout_width="103dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5px"
+        android:layout_marginTop="5px"
         android:gravity="center"
         android:text="Word"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/meaningId"
-        android:layout_width="65dp"
-        android:layout_height="60dp"
-        android:layout_weight="70"
-        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left|top"
         android:text="Meaning"
+        android:layout_marginTop="5px"
+        android:layout_marginBottom="5px"
          />
 </LinearLayout>

@@ -87,10 +87,12 @@ public class MainActivity extends AppCompatActivity {
 
                         for( int i=0 ; i<response.length();i++){
                             String meaningOfWord = null;
+                            String exampleofWord = null;
                             try {
                                 JSONObject currentJsonObj = response.getJSONObject(i);
                                 meaningOfWord = currentJsonObj.getString("definition");
-                                addRow(data, meaningOfWord); //function call
+                                exampleofWord = currentJsonObj.getString("example");
+                                addRow(data, meaningOfWord, exampleofWord); //function call
                                 Log.e("Checking meaning",meaningOfWord);
                                 Log.e("Rest Response:", response.toString());
                             } catch (JSONException e) {
@@ -112,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void addRow(String word, String meaning){
-        boolean success = mDatabaseHelper.addRow(word, meaning);
+    public void addRow(String word, String meaning, String example){
+        boolean success = mDatabaseHelper.addRow(word, meaning, example);
 
         if(success) {
             Log.e("ROW ADDED", "SUCCESSFULLY"); //debug
