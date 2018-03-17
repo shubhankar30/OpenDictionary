@@ -15,7 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
 
-    private static final String TABLE_NAME = "table_words_13";
+    private static final String TABLE_NAME = "table_words_15";
     private static final String COL1 = "ID";
     private static final String COL2 = "word";
     private static final String COL3 = "meaning";
@@ -62,6 +62,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_NAME;
         Cursor data = db.rawQuery(query,null);
         return data;
+    }
+
+    public Cursor getItemId(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL1 + " FROM " + TABLE_NAME +
+                " WHERE " + COL2 + " = '" + name + "'";
+
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    public void deleteWord(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE "
+                + COL2 + " = '" + name + "'";
+
+        Log.d(TAG, "deleting record" + name + "from database");
+        db.execSQL(query);
+
     }
 
 }
