@@ -58,7 +58,7 @@ public class ListDataActivity extends AppCompatActivity {
             toastMessage("Nothing in database");
         } else {
             while (data.moveToNext()) {
-                words = new WordList(data.getString(1), data.getString(2)); //COLUMN 1 contains words, COLUMN 2 contains meanings
+                words = new WordList(data.getString(1), data.getString(2), data.getString(4)); //COLUMN 1 contains words, COLUMN 2 contains meanings
                 wordList.add(words);
             }
             CustomAdapter adapter = new CustomAdapter(this, R.layout.custom_list_adapter, wordList);

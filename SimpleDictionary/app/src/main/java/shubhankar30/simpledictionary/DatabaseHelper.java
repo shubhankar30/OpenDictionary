@@ -15,11 +15,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
 
-    private static final String TABLE_NAME = "table_words_21";
+    private static final String TABLE_NAME = "table_words_27";
     private static final String COL1 = "ID";
     private static final String COL2 = "word";
     private static final String COL3 = "meaning";
     private static final String COL4 = "example";
+    private static final String COL5 = "type";
 
     public DatabaseHelper(Context context){
         super(context, TABLE_NAME, null, 1);
@@ -30,7 +31,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createTable = "CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY  AUTOINCREMENT," +
                 COL2 + " TEXT," +
                 COL3 + " TEXT," +
-                COL4 + " TEXT)";
+                COL4 + " TEXT," +
+                COL5 + " TEXT)";
         db.execSQL(createTable);
 
     }
@@ -42,14 +44,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean addRow(String word, String meaning, String example){
+    public boolean addRow(String word, String meaning, String example, String typeTemp){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL2, word);
         cv.put(COL3, meaning);
         cv.put(COL4, example);
+        cv.put(COL5, typeTemp);
 
-        Log.d(TAG, "addRow: Adding:" + word + " to " + COL2 + " and " + meaning + " to " + COL3 + " and " + example + " to " + COL4); //debug
+        Log.d(TAG, "addRow: Adding:" + word + " to " + COL2 + " and " + meaning + " to " + COL3 + " and " + example + " to " + COL4 + " and " + typeTemp + " to " + COL5); //debug
 
         long testResult = db.insert(TABLE_NAME, null, cv);
 
@@ -101,7 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getRowInfo(String name){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + COL2 + "," + COL4 + " FROM " + TABLE_NAME +
+        String query = "SELECT " + COL2 + "," + COL4 + "," + COL5 + " FROM " + TABLE_NAME +
                 " WHERE " + COL3 + " = '" + name + "'";
 
         Cursor data = db.rawQuery(query, null);

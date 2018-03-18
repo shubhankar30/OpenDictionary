@@ -94,15 +94,17 @@ public class MainActivity extends AppCompatActivity {
                         for( int i=0 ; i<response.length();i++){
                             String meaningOfWord = null;
                             String exampleofWord = null;
+                            String typeofWord = null;
                             try {
                                 JSONObject currentJsonObj = response.getJSONObject(i);
                                 meaningOfWord = currentJsonObj.getString("definition"); //Get meaning from REST response
                                 exampleofWord = currentJsonObj.getString("example");    //Get example from REST response
+                                typeofWord = currentJsonObj.getString("type");
                                 Log.e("Checking meaning",meaningOfWord);
                                 Log.e("Rest Response:", response.toString());
 
 
-                                    addRow(data, meaningOfWord, exampleofWord); //function call
+                                    addRow(data, meaningOfWord, exampleofWord, typeofWord); //function call
 
 
                             } catch (JSONException e) {
@@ -122,8 +124,8 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(jsonarrayRequest);
     }
 
-    public void addRow(String word, String meaning, String example){ //Add Data to database
-        boolean success = mDatabaseHelper.addRow(word, meaning, example);
+    public void addRow(String word, String meaning, String example, String type){ //Add Data to database
+        boolean success = mDatabaseHelper.addRow(word, meaning, example, type);
 
         if(success) {
             Log.e("ROW ADDED", "SUCCESSFULLY"); //debug

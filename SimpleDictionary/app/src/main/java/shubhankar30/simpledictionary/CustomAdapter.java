@@ -33,6 +33,7 @@ public class CustomAdapter extends ArrayAdapter<WordList>{
 
         if(word != null){
             TextView Word = (TextView) convertView.findViewById(R.id.wordId);
+            TextView Type = (TextView) convertView.findViewById(R.id.typeId);
             TextView Meaning = (TextView) convertView.findViewById(R.id.meaningId);
 
             if(Word != null){
@@ -40,6 +41,9 @@ public class CustomAdapter extends ArrayAdapter<WordList>{
             }
             if(Meaning != null){
                 Meaning.setText((word.getMeaning()));
+            }
+            if(Type != null){
+                Type.setText((word.getType()));
             }
 
         }
