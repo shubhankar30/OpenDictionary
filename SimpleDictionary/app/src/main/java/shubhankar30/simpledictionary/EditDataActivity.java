@@ -62,9 +62,9 @@ public class EditDataActivity extends AppCompatActivity{
             meaning_item.setText(selectedMeaning);
 
             if(selectedType.equals("null")){
-                type_item.setText("Type not available");
+                type_item.setText("(Type not available)");
             } else {
-                type_item.setText(selectedType);
+                type_item.setText("(" + selectedType + ")");
             }
 
             //toastMessage("Example is:"+selectedExample); debug

@@ -44,15 +44,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean addRow(String word, String meaning, String example, String type){
+    public boolean addRow(String word, String meaning, String example, String typeTemp){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL2, word);
         cv.put(COL3, meaning);
         cv.put(COL4, example);
-        cv.put(COL5, type);
+        cv.put(COL5, typeTemp);
 
-        Log.d(TAG, "addRow: Adding:" + word + " to " + COL2 + " and " + meaning + " to " + COL3 + " and " + example + " to " + COL4 + " and " + type + " to " + COL5); //debug
+        Log.d(TAG, "addRow: Adding:" + word + " to " + COL2 + " and " + meaning + " to " + COL3 + " and " + example + " to " + COL4 + " and " + typeTemp + " to " + COL5); //debug
 
         long testResult = db.insert(TABLE_NAME, null, cv);
 
