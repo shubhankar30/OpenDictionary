@@ -55,7 +55,8 @@ public class EditDataActivity extends AppCompatActivity{
             word_item.setText(selectedWord);
             meaning_item.setText(selectedMeaning);
 
-            if(selectedExample == null) { //If there is no example for specific word
+            //toastMessage("Example is:"+selectedExample); debug
+            if(selectedExample.equals("null")) { //If there is no example for specific word
                 example_item.setText("Example not available for this context");
             }else{
                 example_item.setText(selectedExample);

@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        if(response.length()==0){
+                            toastMessage("Enter a valid word");
+                        }
 
                         for( int i=0 ; i<response.length();i++){
                             String meaningOfWord = null;
