@@ -7,10 +7,12 @@ package shubhankar30.simpledictionary;
 public class WordList {
     private String word;
     private String meaning;
+    private String type;
 
-    public WordList(String temp_word,String temp_meaning){
+    public WordList(String temp_word,String temp_meaning, String temp_type){
         word = temp_word;
         meaning = temp_meaning;
+        type = temp_type;
     }
 
     public String getWord() {
@@ -19,5 +21,9 @@ public class WordList {
 
     public String getMeaning() {
         return meaning;
+    }
+
+    public String getType() {
+        return type;
     }
 }

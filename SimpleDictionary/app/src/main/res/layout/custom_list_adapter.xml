@@ -19,6 +19,16 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/typeId"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="7px"
+        android:layout_marginTop="7px"
+        android:textSize="14sp"
+        android:text="Type" />
+
+    <TextView
         android:id="@+id/meaningId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
