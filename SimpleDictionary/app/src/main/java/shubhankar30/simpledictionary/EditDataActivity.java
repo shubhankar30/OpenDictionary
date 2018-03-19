@@ -20,6 +20,7 @@ public class EditDataActivity extends AppCompatActivity{
 
     private static final String TAG = "EditDataActivity";
     private Button btnDelete;
+    private Button btnBack;
     private TextView word_item;
     private TextView meaning_item;
     private TextView example_item;
@@ -37,6 +38,7 @@ public class EditDataActivity extends AppCompatActivity{
         setContentView(R.layout.edit_data_layout);
 
         btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnBack = (Button) findViewById(R.id.btnBackEditDataActivity);
         word_item = (TextView) findViewById(R.id.word_item);
         meaning_item = (TextView) findViewById(R.id.meaning_item);
         example_item = (TextView) findViewById(R.id.example_item);
@@ -81,6 +83,13 @@ public class EditDataActivity extends AppCompatActivity{
                 public void onClick(View view) {
                     mDatabaseHelper.deleteWord(selectedWord);
                     toastMessage("Word deleted");
+                    finish();
+                }
+            });
+
+            btnBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     finish();
                 }
             });
