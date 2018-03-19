@@ -70,7 +70,29 @@ public class EditDataActivity extends AppCompatActivity{
                 selectedType = data.getString(2);
             }
         }
-            word_item.setText(selectedWord);
+
+
+        //Single Quotes Error
+       // if(selectedType.contains("''")){
+          //  selectedType = selectedType.replaceAll("''", "'");
+      //  }
+       // if(selectedMeaning.contains("''")){
+       //     selectedMeaning = selectedMeaning.replaceAll("''", "'");
+       // }
+       // if(selectedExample.contains("''")){
+        //    selectedExample = selectedExample.replaceAll("''", "'");
+       // }
+
+
+
+
+
+
+
+
+
+
+        word_item.setText(selectedWord);
             meaning_item.setText(Html.fromHtml(selectedMeaning));
 
             if(selectedType.equals("null")){

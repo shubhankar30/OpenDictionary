@@ -37,6 +37,8 @@ public class CustomAdapter extends ArrayAdapter<WordList>{
             TextView Type = (TextView) convertView.findViewById(R.id.typeId);
             TextView Meaning = (TextView) convertView.findViewById(R.id.meaningId);
 
+
+            //render <b> </b> from HTML
             if(Word != null){
                 Word.setText((word.getWord()));
             }

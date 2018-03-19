@@ -15,7 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
 
-    private static final String TABLE_NAME = "table_words_27";
+    private static final String TABLE_NAME = "table_words_39";
     private static final String COL1 = "ID";
     private static final String COL2 = "word";
     private static final String COL3 = "meaning";
@@ -86,6 +86,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getItemId(String name){
         SQLiteDatabase db = this.getWritableDatabase();
+        Log.d("The current db call:", name);
+
         String query = "SELECT " + COL1 + " FROM " + TABLE_NAME +
                 " WHERE " + COL3 + " = '" + name + "'";
 

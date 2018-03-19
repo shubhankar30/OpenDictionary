@@ -109,8 +109,20 @@ public class ListDataActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String meaning = ((TextView) view.findViewById(R.id.meaningId)).getText().toString();
 
+                toastMessage("111Pressed " + meaning);
+
+
+                Log.d(TAG, "onItemClick: You clicked " + meaning);
+
+                //Single Quotes Error
+                if(meaning.contains("'")){
+                    meaning = meaning.replaceAll("'", "''");
+                }
+
+
+
                 Log.d(TAG, "onItemClick: You clicked" + meaning);
-                //toastMessage("Pressed " + name22); Debug
+                toastMessage("Pressed " + meaning);
 
                 Cursor data = mDatabaseHelper.getItemId(meaning);
                 int itemId = -1;

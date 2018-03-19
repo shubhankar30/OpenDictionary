@@ -128,6 +128,19 @@ public class MainActivity extends AppCompatActivity {
                                 meaningOfWord = currentJsonObj.getString("definition"); //Get meaning from REST response
                                 exampleofWord = currentJsonObj.getString("example");    //Get example from REST response
                                 typeofWord = currentJsonObj.getString("type");
+
+                                /*/Single Quotes Error
+                                if(meaningOfWord.contains("'")){
+                                    meaningOfWord = meaningOfWord.replaceAll("'", "''");
+                                }
+                                if(exampleofWord.contains("'")){
+                                    exampleofWord = exampleofWord.replaceAll("'", "''");
+                                }
+                                if(typeofWord.contains("'")){
+                                    typeofWord = typeofWord.replaceAll("'", "''");
+                                }*/
+
+
                                 Log.e("Checking meaning",meaningOfWord);
                                 Log.e("Rest Response:", response.toString());
 
