@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                                 exampleofWord = currentJsonObj.getString("example");    //Get example from REST response
                                 typeofWord = currentJsonObj.getString("type");
 
-                                /*/Single Quotes Error
+                                /*//String Cleaning (Remove symbols and characters)
                                 if(meaningOfWord.contains("'")){
                                     meaningOfWord = meaningOfWord.replaceAll("'", "''");
                                 }

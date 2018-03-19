@@ -54,8 +54,6 @@ public class EditDataActivity extends AppCompatActivity{
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-
-
         Intent receivedIntent = getIntent();
 
         //selectedId = receivedIntent.getIntExtra("id", -1); //-1 is default value
@@ -71,27 +69,6 @@ public class EditDataActivity extends AppCompatActivity{
             }
         }
 
-
-        //Single Quotes Error
-       // if(selectedType.contains("''")){
-          //  selectedType = selectedType.replaceAll("''", "'");
-      //  }
-       // if(selectedMeaning.contains("''")){
-       //     selectedMeaning = selectedMeaning.replaceAll("''", "'");
-       // }
-       // if(selectedExample.contains("''")){
-        //    selectedExample = selectedExample.replaceAll("''", "'");
-       // }
-
-
-
-
-
-
-
-
-
-
         word_item.setText(selectedWord);
             meaning_item.setText(Html.fromHtml(selectedMeaning));
 
@@ -101,7 +78,6 @@ public class EditDataActivity extends AppCompatActivity{
                 type_item.setText("(" + selectedType + ")");
             }
 
-            //toastMessage("Example is:"+selectedExample); debug
             if(selectedExample.equals("null")) { //If there is no example for specific word
                 example_item.setText("Example not available for this context");
             }else{
@@ -127,6 +103,7 @@ public class EditDataActivity extends AppCompatActivity{
             });
         }
 
+    //To end activity when back button is pressed
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -142,7 +119,7 @@ public class EditDataActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    //customizable toast
+    //Customizable toast
     private void toastMessage(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

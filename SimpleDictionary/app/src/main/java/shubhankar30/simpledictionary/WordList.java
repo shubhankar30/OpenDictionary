@@ -1,7 +1,5 @@
 package shubhankar30.simpledictionary;
 
-import android.content.SharedPreferences;
-
 /**
  * Created by shubhankarranade30 on 16-03-2018.
  */
@@ -19,25 +17,14 @@ public class WordList {
     }
 
     public String getWord() {
-        //Single Quotes Error
-       // if(word.contains("''")){
-         //   word = word.replaceAll("''", "'");
-        //}
-
         return word;
     }
 
     public String getMeaning() {
-      //  if(meaning.contains("''")){
-        //    meaning = meaning.replaceAll("''", "'");
-      //  }
         return meaning;
     }
 
     public String getType() {
-       // if(type.contains("''")){
-      //      type = type.replaceAll("''", "'");
-      //  }
         return type;
     }
 }

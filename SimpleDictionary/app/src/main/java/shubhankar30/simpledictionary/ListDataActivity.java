@@ -86,7 +86,6 @@ public class ListDataActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     private void populateListView() {
         Log.d(TAG, "populateListView: Displaying data in ListView");
 
@@ -96,7 +95,7 @@ public class ListDataActivity extends AppCompatActivity {
         if (numRows == 0) {
             toastMessage("Nothing in database");
         } else {
-            while (data.moveToNext()) {
+            while (data.moveToNext()) { //Move to next Row
                 words = new WordList(data.getString(1), data.getString(2), data.getString(4)); //COLUMN 1 contains words, COLUMN 2 contains meanings
                 wordList.add(words);
             }
@@ -109,20 +108,15 @@ public class ListDataActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String meaning = ((TextView) view.findViewById(R.id.meaningId)).getText().toString();
 
-                toastMessage("111Pressed " + meaning);
-
-
-                Log.d(TAG, "onItemClick: You clicked " + meaning);
+               // toastMessage("Pressed " + meaning);
 
                 //Single Quotes Error
                 if(meaning.contains("'")){
                     meaning = meaning.replaceAll("'", "''");
                 }
 
-
-
                 Log.d(TAG, "onItemClick: You clicked" + meaning);
-                toastMessage("Pressed " + meaning);
+                //toastMessage("Pressed " + meaning);
 
                 Cursor data = mDatabaseHelper.getItemId(meaning);
                 int itemId = -1;

@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 /**
@@ -37,16 +36,14 @@ public class CustomAdapter extends ArrayAdapter<WordList>{
             TextView Type = (TextView) convertView.findViewById(R.id.typeId);
             TextView Meaning = (TextView) convertView.findViewById(R.id.meaningId);
 
-
-            //render <b> </b> from HTML
             if(Word != null){
                 Word.setText((word.getWord()));
             }
             if(Meaning != null){
-                Meaning.setText(Html.fromHtml((word.getMeaning())));
+                Meaning.setText(Html.fromHtml((word.getMeaning())));//render <b> </b> from HTML
             }
             if(Type != null){
-                Type.setText(Html.fromHtml((word.getType())));
+                Type.setText(Html.fromHtml((word.getType())));//render <b> </b> from HTML
             }
 
         }
