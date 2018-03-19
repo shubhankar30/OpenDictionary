@@ -1,9 +1,12 @@
 package shubhankar30.simpledictionary;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +26,8 @@ public class ListDataActivity extends AppCompatActivity {
     private static final String TAG = "ListDataActivity";
     ArrayList<WordList> wordList;
     WordList words;
+    private boolean isFirstRun = true;
+    private SharedPreferences prefs;
 
 
     DatabaseHelper mDatabaseHelper;
@@ -34,6 +39,23 @@ public class ListDataActivity extends AppCompatActivity {
         setContentView(R.layout.list_layout);
         mListView = (ListView) findViewById(R.id.listView);
         mDatabaseHelper = new DatabaseHelper(this);
+
+        //Create AlertDialog only once
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        isFirstRun = prefs.getBoolean("isFirstRun", true);
+        if(isFirstRun){
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+            alertDialog.setTitle("About");
+            alertDialog.setMessage("Click on a row to get details of the respective word");
+            alertDialog.setPositiveButton("OK",null);
+            //String alert1 = "Message here " ;
+            //alertDialog.setMessage(alert1 +"\n"+ alert2 +"\n"+ alert3);
+            AlertDialog alert = alertDialog.create();
+            alert.show();
+        }
+        isFirstRun = false;
+        prefs.edit().putBoolean("isFirstRun", isFirstRun).commit();
 
         populateListView();
     }
