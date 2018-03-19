@@ -3,6 +3,7 @@ package shubhankar30.simpledictionary;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
     private Button btnAdd, btnViewData;
+    private ImageButton btnHelp;
     private EditText editText;
 
     @Override
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editText);
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnViewData = (Button) findViewById(R.id.btnView);
+        btnHelp = (ImageButton) findViewById(R.id.btnHelp);
         mDatabaseHelper = new DatabaseHelper(this);
 
 
@@ -80,6 +84,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        btnHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+
+                alertDialog.setTitle("This is your Dictionary");
+                String alert1= "Type in any word and press add word to add it to your local dictionary.";
+                String alert2 = "Click view dictionary to see your local dictionary";
+                String alert3 = "You can select the individual words in your dictionary to see their respective examples. You can even delete any word you do not need anymore.";
+                alertDialog.setMessage(alert1 +"\n\n"+ alert2 +"\n\n"+ alert3);
+                alertDialog.setPositiveButton("OK",null);
+                AlertDialog alert = alertDialog.create();
+                alert.show();
             }
         });
     }
@@ -141,6 +161,13 @@ public class MainActivity extends AppCompatActivity {
             Log.e("ROW ADDED", "FAILED"); //debug
         }
     }
+
+    @Override
+    public void onDestroy() {
+        mDatabaseHelper.close();
+        super.onDestroy();
+    }
+
 
 
     private void toastMessage(String message) {

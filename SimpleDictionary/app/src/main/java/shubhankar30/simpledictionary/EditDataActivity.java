@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -70,7 +71,7 @@ public class EditDataActivity extends AppCompatActivity{
             }
         }
             word_item.setText(selectedWord);
-            meaning_item.setText(selectedMeaning);
+            meaning_item.setText(Html.fromHtml(selectedMeaning));
 
             if(selectedType.equals("null")){
                 type_item.setText("(Type not available)");
@@ -82,7 +83,7 @@ public class EditDataActivity extends AppCompatActivity{
             if(selectedExample.equals("null")) { //If there is no example for specific word
                 example_item.setText("Example not available for this context");
             }else{
-                example_item.setText(selectedExample);
+                example_item.setText(Html.fromHtml(selectedExample));
             }
 
            // toastMessage("NAME ADDED:" + selectedMeaning); Debug

@@ -1,6 +1,7 @@
 package shubhankar30.simpledictionary;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,10 +41,10 @@ public class CustomAdapter extends ArrayAdapter<WordList>{
                 Word.setText((word.getWord()));
             }
             if(Meaning != null){
-                Meaning.setText((word.getMeaning()));
+                Meaning.setText(Html.fromHtml((word.getMeaning())));
             }
             if(Type != null){
-                Type.setText((word.getType()));
+                Type.setText(Html.fromHtml((word.getType())));
             }
 
         }
