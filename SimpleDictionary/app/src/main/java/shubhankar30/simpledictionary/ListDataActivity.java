@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -40,6 +41,13 @@ public class ListDataActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.listView);
         mDatabaseHelper = new DatabaseHelper(this);
 
+        //Add back button to toolbar
+        if(getSupportActionBar()!=null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+
         //Create AlertDialog only once
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         isFirstRun = prefs.getBoolean("isFirstRun", true);
@@ -69,6 +77,15 @@ public class ListDataActivity extends AppCompatActivity {
         populateListView();
         //toastMessage("Activity refreshed"); Debug
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void populateListView() {
         Log.d(TAG, "populateListView: Displaying data in ListView");

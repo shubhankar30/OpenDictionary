@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="shubhankar30.simpledictionary.MainActivity">
+    tools:context="shubhankar30.simpledictionary.MainActivity"
+    >
 
     <EditText
         android:id="@+id/editText"
@@ -21,27 +22,31 @@
 
     <Button
         android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
+        android:layout_width="129dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
+        android:background="@drawable/shape"
         android:text="Add word"
-        app:layout_constraintEnd_toStartOf="@+id/btnView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <Button
         android:id="@+id/btnView"
-        android:layout_width="wrap_content"
+        android:layout_width="132dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
+        android:background="@drawable/shape"
         android:text="View list"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnAdd"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
 
     <TextView
         android:id="@+id/textView"

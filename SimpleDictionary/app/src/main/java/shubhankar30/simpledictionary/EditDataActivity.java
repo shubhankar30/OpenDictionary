@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -45,6 +46,14 @@ public class EditDataActivity extends AppCompatActivity{
         type_item = (TextView) findViewById(R.id.type_item);
 
         mDatabaseHelper = new DatabaseHelper(this);
+
+        //Add back button to toolbar
+        if(getSupportActionBar()!=null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+
 
         Intent receivedIntent = getIntent();
 
@@ -99,6 +108,15 @@ public class EditDataActivity extends AppCompatActivity{
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    //Add Back button to toolbar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //customizable toast

@@ -76,7 +76,7 @@
 
         <Button
             android:id="@+id/btnDelete"
-            android:layout_width="wrap_content"
+            android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:layout_above="@+id/textView7"
             android:layout_centerHorizontal="true"
@@ -84,6 +84,7 @@
             android:layout_marginEnd="68dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="76dp"
+            android:background="@drawable/shape"
             android:text="DELETE"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -128,12 +129,13 @@
 
         <Button
             android:id="@+id/btnBackEditDataActivity"
-            android:layout_width="wrap_content"
+            android:layout_width="126dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="68dp"
             android:layout_marginTop="76dp"
+            android:background="@drawable/shape"
             android:text="Back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnDelete"
