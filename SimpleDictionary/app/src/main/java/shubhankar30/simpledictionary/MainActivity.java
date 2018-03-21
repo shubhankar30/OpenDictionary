@@ -7,6 +7,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -174,14 +178,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void createInformationDialog(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-        alertDialog.setTitle("This is your Dictionary");
-        String alert1= "Type in any word and press add word to add it to your local dictionary.";
-        String alert2 = "Click view dictionary to see your local dictionary";
-        String alert3 = "You can select the individual words in your dictionary to see their respective examples. You can even delete any word you do not need anymore.";
-        alertDialog.setMessage(alert1 +"\n\n"+ alert2 +"\n\n"+ alert3);
-        alertDialog.setPositiveButton("OK",null);
-        AlertDialog alert = alertDialog.create();
-        alert.show();
+        //String link1 = Html.fromHtml("<a href='http://www.github.com/shubhankar30/SimpleDictionary'>Github Repository Link</a>");
+
+        ((TextView) new AlertDialog.Builder(this)
+                .setTitle("Info")
+                .setIcon(android.R.drawable.ic_menu_info_details)
+                .setMessage(Html.fromHtml("This application is mainly designed to be an on-the-go dictionary with simplistic design and an open source documentation." +
+                        "<p>Just type in the required word in the provided box and click add word. This will add the word in your Simple Dictionary</p> " +
+                        "<p>Click view list to see the meanings of all the words you have saved in your own dictionary. </p><br>" +
+                        "<br><br><br><br>" +
+                        "<p>Application repo at: <a href=\"http://www.github.com/shubhankar30/SimpleDictionary\">Github Repository link</a><br>" +
+                        "Dictionary API used: <a href=\"https://owlbot.info/\">Owlbot Info</a></p>" +
+                        ""))
+                .show()
+                // Need to be called after show(), in order to generate hyperlinks
+                .findViewById(android.R.id.message))
+                .setMovementMethod(LinkMovementMethod.getInstance());
     }
 
 

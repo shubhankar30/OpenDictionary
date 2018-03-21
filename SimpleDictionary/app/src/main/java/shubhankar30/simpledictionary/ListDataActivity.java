@@ -8,6 +8,8 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -91,17 +93,21 @@ public class ListDataActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //Create information dialog for page
     private void createInformationDialog(){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ListDataActivity.this);
-        alertDialog.setTitle("This is your Dictionary");
-        String alert1= "Type in any word and press add word to add it to your local dictionary.";
-        String alert2 = "Click view dictionary to see your local dictionary";
-        String alert3 = "You can select the individual words in your dictionary to see their respective examples. You can even delete any word you do not need anymore.";
-        alertDialog.setMessage(alert1 +"\n\n"+ alert2 +"\n\n"+ alert3);
-        alertDialog.setPositiveButton("OK",null);
-        AlertDialog alert = alertDialog.create();
-        alert.show();
+        ((TextView) new AlertDialog.Builder(this)
+                .setTitle("Info")
+                .setIcon(android.R.drawable.ic_menu_info_details)
+                .setMessage(Html.fromHtml("" +
+                        "<p>Scroll through your list to see any word you have added to your dictionary</p> " +
+                        "<p>You can click on any word to have the option to delete it and see its example with the related meaning. </p><br>" +
+                        "<br><br><br><br>" +
+                        "<p>Application repo at: <a href=\"http://www.github.com/shubhankar30/SimpleDictionary\">Github Repository link</a><br>" +
+                        "Dictionary API used: <a href=\"https://owlbot.info/\">Owlbot Info</a></p>" +
+                        ""))
+                .show()
+                // Need to be called after show(), in order to generate hyperlinks
+                .findViewById(android.R.id.message))
+                .setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     //Fill the ListView with items
