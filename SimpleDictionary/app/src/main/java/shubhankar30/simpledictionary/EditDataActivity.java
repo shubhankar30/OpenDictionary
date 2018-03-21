@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -110,14 +112,46 @@ public class EditDataActivity extends AppCompatActivity{
         finish();
     }
 
-    //Add Back button to toolbar
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.information_topright,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if (item.getItemId() == android.R.id.home){
             finish();
+        } else {
+            createInformationDialog();
+
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void createInformationDialog(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(EditDataActivity.this);
+        alertDialog.setTitle("This is your Dictionary");
+        String alert1= "Type in any word and press add word to add it to your local dictionary.";
+        String alert2 = "Click view dictionary to see your local dictionary";
+        String alert3 = "You can select the individual words in your dictionary to see their respective examples. You can even delete any word you do not need anymore.";
+        alertDialog.setMessage(alert1 +"\n\n"+ alert2 +"\n\n"+ alert3);
+        alertDialog.setPositiveButton("OK",null);
+        AlertDialog alert = alertDialog.create();
+        alert.show();
+    }
+
+
+
+    //Add Back button to toolbar
+   // @Override
+   // public boolean onOptionsItemSelected(MenuItem item){
+   //     if (item.getItemId() == android.R.id.home){
+      //      finish();
+    //    }
+       // return super.onOptionsItemSelected(item);
+  //  }
 
     //Customizable toast
     private void toastMessage(String message){

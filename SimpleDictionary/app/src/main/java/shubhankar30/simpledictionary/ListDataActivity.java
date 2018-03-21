@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -52,15 +53,7 @@ public class ListDataActivity extends AppCompatActivity {
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         isFirstRun = prefs.getBoolean("isFirstRun", true);
         if(isFirstRun){
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-
-            alertDialog.setTitle("About");
-            alertDialog.setMessage("Click on a row to get details of the respective word");
-            alertDialog.setPositiveButton("OK",null);
-            //String alert1 = "Message here " ;
-            //alertDialog.setMessage(alert1 +"\n"+ alert2 +"\n"+ alert3);
-            AlertDialog alert = alertDialog.create();
-            alert.show();
+            createInformationDialog();
         }
         isFirstRun = false;
         prefs.edit().putBoolean("isFirstRun", isFirstRun).commit();
@@ -78,14 +71,40 @@ public class ListDataActivity extends AppCompatActivity {
         //toastMessage("Activity refreshed"); Debug
     }
 
+
+    //Show information icon on top right of toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.information_topright,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //Choose between back button and information button on toolbar
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if (item.getItemId() == android.R.id.home){
             finish();
+        } else {
+            createInformationDialog();
+
         }
         return super.onOptionsItemSelected(item);
     }
 
+    //Create information dialog for page
+    private void createInformationDialog(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ListDataActivity.this);
+        alertDialog.setTitle("This is your Dictionary");
+        String alert1= "Type in any word and press add word to add it to your local dictionary.";
+        String alert2 = "Click view dictionary to see your local dictionary";
+        String alert3 = "You can select the individual words in your dictionary to see their respective examples. You can even delete any word you do not need anymore.";
+        alertDialog.setMessage(alert1 +"\n\n"+ alert2 +"\n\n"+ alert3);
+        alertDialog.setPositiveButton("OK",null);
+        AlertDialog alert = alertDialog.create();
+        alert.show();
+    }
+
+    //Fill the ListView with items
     private void populateListView() {
         Log.d(TAG, "populateListView: Displaying data in ListView");
 

@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editText);
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnViewData = (Button) findViewById(R.id.btnView);
-        btnHelp = (ImageButton) findViewById(R.id.btnHelp);
         mDatabaseHelper = new DatabaseHelper(this);
 
 
@@ -84,22 +85,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        btnHelp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-
-                alertDialog.setTitle("This is your Dictionary");
-                String alert1= "Type in any word and press add word to add it to your local dictionary.";
-                String alert2 = "Click view dictionary to see your local dictionary";
-                String alert3 = "You can select the individual words in your dictionary to see their respective examples. You can even delete any word you do not need anymore.";
-                alertDialog.setMessage(alert1 +"\n\n"+ alert2 +"\n\n"+ alert3);
-                alertDialog.setPositiveButton("OK",null);
-                AlertDialog alert = alertDialog.create();
-                alert.show();
             }
         });
     }
@@ -174,6 +159,31 @@ public class MainActivity extends AppCompatActivity {
             Log.e("ROW ADDED", "FAILED"); //debug
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.information_topright,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        createInformationDialog();
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void createInformationDialog(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        alertDialog.setTitle("This is your Dictionary");
+        String alert1= "Type in any word and press add word to add it to your local dictionary.";
+        String alert2 = "Click view dictionary to see your local dictionary";
+        String alert3 = "You can select the individual words in your dictionary to see their respective examples. You can even delete any word you do not need anymore.";
+        alertDialog.setMessage(alert1 +"\n\n"+ alert2 +"\n\n"+ alert3);
+        alertDialog.setPositiveButton("OK",null);
+        AlertDialog alert = alertDialog.create();
+        alert.show();
+    }
+
 
     @Override
     public void onDestroy() {
