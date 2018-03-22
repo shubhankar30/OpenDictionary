@@ -9,9 +9,9 @@ Just add the words you want to save in your own dictionary and view them later a
 How to use instructions are given inside the application. 
 
 Development Tools and technologies:
-Android Studio for development of application.
-Volley API for making REST calls.
-SQLite for creating Local Database.
+Android Studio for development of application.<br>
+Volley API for making REST calls.<br>
+SQLite for creating Local Database.<br>
 Owlbot is an open source online dictionary API.Link: www.owlbot.info
 
 Future updates include:
