@@ -12,7 +12,7 @@ Development Tools and technologies:
 Android Studio for development of application.<br>
 Volley API for making REST calls.<br>
 SQLite for creating Local Database.<br>
-Owlbot is an open source online dictionary API.Link: www.owlbot.info
+Owlbot(www.owlbot.info) is an open source online dictionary API. 
 
 Future updates include:
 1. Showing the list of meaning on the homepage when you enter word for immediate use.
