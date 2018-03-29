@@ -18,11 +18,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 /**
  * Created by shubhankarranade30 on 05-03-2018.
+ * Github link: https://github.com/shubhankar30
+ * Email-id: shubhankarranade30@gmail.com
  */
 
 public class ListDataActivity extends AppCompatActivity {
@@ -32,10 +33,7 @@ public class ListDataActivity extends AppCompatActivity {
     WordList words;
     private boolean isFirstRun = true;
     private SharedPreferences prefs;
-
-
     DatabaseHelper mDatabaseHelper;
-
     private ListView mListView;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +48,6 @@ public class ListDataActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-
         //Create AlertDialog only once
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         isFirstRun = prefs.getBoolean("isFirstRun", true);
@@ -60,19 +57,19 @@ public class ListDataActivity extends AppCompatActivity {
         isFirstRun = false;
         prefs.edit().putBoolean("isFirstRun", isFirstRun).commit();
 
+        //Main Function to Add items to ListView
         populateListView();
     }
 
+    //To refresh the ListDataActivity page when user backtracks to Activity
     @Override
-    protected void onResume() { //To refresh the ListDataActivity page when user backtracks to Activity
+    protected void onResume() {
         super.onResume();
         setContentView(R.layout.list_layout);
         mListView = (ListView) findViewById(R.id.listView);
         mDatabaseHelper = new DatabaseHelper(this);
         populateListView();
-        //toastMessage("Activity refreshed"); Debug
     }
-
 
     //Show information icon on top right of toolbar
     @Override
@@ -88,31 +85,13 @@ public class ListDataActivity extends AppCompatActivity {
             finish();
         } else {
             createInformationDialog();
-
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void createInformationDialog(){
-        ((TextView) new AlertDialog.Builder(this)
-                .setTitle("Info")
-                .setIcon(android.R.drawable.ic_menu_info_details)
-                .setMessage(Html.fromHtml("" +
-                        "<p>Scroll through your list to see any word you have added to your dictionary</p> " +
-                        "<p>You can click on any word to have the option to delete it and see its example with the related meaning. </p><br>" +
-                        "<br><br><br><br>" +
-                        "<p>Application repo at: <a href=\"http://www.github.com/shubhankar30/SimpleDictionary\">Github Repository link</a><br>" +
-                        "Dictionary API used: <a href=\"https://owlbot.info/\">Owlbot Info</a></p>" +
-                        ""))
-                .show()
-                // Need to be called after show(), in order to generate hyperlinks
-                .findViewById(android.R.id.message))
-                .setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
     //Fill the ListView with items
     private void populateListView() {
-        Log.d(TAG, "populateListView: Displaying data in ListView");
+        Log.d(TAG, "populateListView: Displaying data in ListView");//Debug
 
         wordList = new ArrayList<>();
         Cursor data = mDatabaseHelper.getData();
@@ -133,15 +112,12 @@ public class ListDataActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String meaning = ((TextView) view.findViewById(R.id.meaningId)).getText().toString();
 
-               // toastMessage("Pressed " + meaning);
-
-                //Single Quotes Error
+                //Single Quotes Error Fix ( SQL Injection )
                 if(meaning.contains("'")){
                     meaning = meaning.replaceAll("'", "''");
                 }
 
-                Log.d(TAG, "onItemClick: You clicked" + meaning);
-                //toastMessage("Pressed " + meaning);
+                Log.d(TAG, "onItemClick: You clicked" + meaning); //Debug
 
                 Cursor data = mDatabaseHelper.getItemId(meaning);
                 int itemId = -1;
@@ -149,9 +125,8 @@ public class ListDataActivity extends AppCompatActivity {
                     itemId = data.getInt(0);
                 }
                 if(itemId > -1){
-                    Log.d(TAG, "onItemClick: ID is : " + itemId);
+                    Log.d(TAG, "onItemClick: ID is : " + itemId);//Debug
                     Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
-
                     editScreenIntent.putExtra("meaning", meaning); //To send meaning of row to EditDataActivity
                     startActivity(editScreenIntent);
                 }
@@ -160,6 +135,23 @@ public class ListDataActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //App Info Dialogue
+    private void createInformationDialog(){
+        ((TextView) new AlertDialog.Builder(this)
+                .setTitle("Info")
+                .setIcon(android.R.drawable.ic_menu_info_details)
+                .setMessage(Html.fromHtml("" +
+                        "<p>Scroll through your list to see any word you have added to your dictionary</p>" +
+                        "<p>You can click on any word to have the option to delete it and see its example with the related meaning.</p><br>" +
+                        "<br><br><br><br>" +
+                        "<p>Application repo at: <a href=\"http://www.github.com/shubhankar30/SimpleDictionary\">Github Repository link</a><br>" +
+                        ""))
+                .show()
+                // Need to be called after show(), in order to generate hyperlinks
+                .findViewById(android.R.id.message))
+                .setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     //Customizable toast

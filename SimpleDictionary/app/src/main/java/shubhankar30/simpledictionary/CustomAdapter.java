@@ -10,7 +10,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by shubhankarranade30 on 16-03-2018.
+ * Created by shubhankarranade30 on 14-03-2018.
+ * Github link: https://github.com/shubhankar30
+ * Email-id: shubhankarranade30@gmail.com
  */
 
 public class CustomAdapter extends ArrayAdapter<WordList>{

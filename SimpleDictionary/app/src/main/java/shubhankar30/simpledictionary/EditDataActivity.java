@@ -15,10 +15,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
 /**
  * Created by shubhankarranade30 on 17-03-2018.
+ * Github link: https://github.com/shubhankar30
+ * Email-id: shubhankarranade30@gmail.com
  */
 
 public class EditDataActivity extends AppCompatActivity{
@@ -131,22 +132,21 @@ public class EditDataActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-        private void createInformationDialog(){
-        ((TextView) new AlertDialog.Builder(this)
-                .setTitle("Info")
-                .setIcon(android.R.drawable.ic_menu_info_details)
-                .setMessage(Html.fromHtml("" +
-                        "<p>You can see the example for the respective word for the context meaning that you have selected.</p> " +
-                        "<p>To delete the word from your dictionary, press the delete word button given below. </p>" +
-                        "<p>To just delete one single meaning from your dictionary, press the delete meaning button below.<br>" +
-                        "<br><br><br><br>" +
-                        "<p>Application repo at: <a href=\"http://www.github.com/shubhankar30/SimpleDictionary\">Github Repository link</a><br>" +
-                        "Dictionary API used: <a href=\"https://owlbot.info/\">Owlbot Info</a></p>" +
-                        ""))
-                .show()
-                // Need to be called after show(), in order to generate hyperlinks
-                .findViewById(android.R.id.message))
-                .setMovementMethod(LinkMovementMethod.getInstance());
+    private void createInformationDialog(){
+    ((TextView) new AlertDialog.Builder(this)
+        .setTitle("Info")
+        .setIcon(android.R.drawable.ic_menu_info_details)
+        .setMessage(Html.fromHtml("" +
+                "<p>You can see the example for the respective word for the context meaning that you have selected.</p> " +
+                "<p>To delete the word from your dictionary, press the delete word button given below. </p>" +
+                "<p>To just delete one single meaning from your dictionary, press the delete meaning button below.<br>" +
+                "<br><br><br><br>" +
+                "<p>Application repo at: <a href=\"http://www.github.com/shubhankar30/SimpleDictionary\">Github Repository link</a><br>" +
+                ""))
+        .show()
+        // Need to be called after show(), in order to generate hyperlinks
+        .findViewById(android.R.id.message))
+        .setMovementMethod(LinkMovementMethod.getInstance());
     }
 
 

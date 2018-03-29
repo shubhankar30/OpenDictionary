@@ -1,14 +1,11 @@
 package shubhankar30.simpledictionary;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
@@ -16,32 +13,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonObject;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
+/**
+ * Created by shubhankarranade30 on 05-03-2018.
+ * Github link: https://github.com/shubhankar30
+ * Email-id: shubhankarranade30@gmail.com
+ */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
     private Button btnAdd, btnViewData;
-    private ImageButton btnHelp;
     private EditText editText;
 
     @Override
@@ -61,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         btnViewData = (Button) findViewById(R.id.btnView);
         mDatabaseHelper = new DatabaseHelper(this);
 
-
+        //Set toolbar details
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.ic_launcher);
@@ -110,33 +97,19 @@ public class MainActivity extends AppCompatActivity {
 
                         for( int i=0 ; i<response.length();i++){
                             String meaningOfWord = null;
-                            String exampleofWord = null;
-                            String typeofWord = null;
+                            String exampleOfWord = null;
+                            String typeOfWord = null;
                             try {
                                 JSONObject currentJsonObj = response.getJSONObject(i);
                                 meaningOfWord = currentJsonObj.getString("definition"); //Get meaning from REST response
-                                exampleofWord = currentJsonObj.getString("example");    //Get example from REST response
-                                typeofWord = currentJsonObj.getString("type");
+                                exampleOfWord = currentJsonObj.getString("example");    //Get example from REST response
+                                typeOfWord = currentJsonObj.getString("type");
 
-                                /*//String Cleaning (Remove symbols and characters)
-                                if(meaningOfWord.contains("'")){
-                                    meaningOfWord = meaningOfWord.replaceAll("'", "''");
-                                }
-                                if(exampleofWord.contains("'")){
-                                    exampleofWord = exampleofWord.replaceAll("'", "''");
-                                }
-                                if(typeofWord.contains("'")){
-                                    typeofWord = typeofWord.replaceAll("'", "''");
-                                }*/
+                                Log.e("Checking meaning",meaningOfWord); //Debug
+                                Log.e("Rest Response:", response.toString());//Debug
 
-
-                                Log.e("Checking meaning",meaningOfWord);
-                                Log.e("Rest Response:", response.toString());
-
-
-                                    addRow(data, meaningOfWord, exampleofWord, typeofWord); //function call
-
-
+                                //Database add function call
+                                addRow(data, meaningOfWord, exampleOfWord, typeOfWord);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -146,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Rest Response:",error.toString());
+                        Log.e("Rest Response:",error.toString());//Debug
                         toastMessage("Please enter a valid word");
                     }
                 }
@@ -154,31 +127,34 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(jsonarrayRequest);
     }
 
-    public void addRow(String word, String meaning, String example, String type){ //Add Data to database
+    //Add Data to Database
+    public void addRow(String word, String meaning, String example, String type){
         boolean success = mDatabaseHelper.addRow(word, meaning, example, type);
 
         if(success) {
-            Log.e("ROW ADDED", "SUCCESSFULLY"); //debug
+            Log.e("ROW ADDED", "SUCCESSFULLY"); //Debug
         }else {
-            Log.e("ROW ADDED", "FAILED"); //debug
+            Log.e("ROW ADDED", "FAILED"); //Debug
         }
     }
 
+    //Create Menu items in toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.information_topright,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    //Select Menu Items on toolbar
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         createInformationDialog();
         return super.onOptionsItemSelected(item);
     }
 
+    //Create App Info Dialogue
     private void createInformationDialog(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-        //String link1 = Html.fromHtml("<a href='http://www.github.com/shubhankar30/SimpleDictionary'>Github Repository Link</a>");
 
         ((TextView) new AlertDialog.Builder(this)
                 .setTitle("Info")
@@ -188,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
                         "<p>Click view list to see the meanings of all the words you have saved in your own dictionary. </p><br>" +
                         "<br><br><br><br>" +
                         "<p>Application repo at: <a href=\"http://www.github.com/shubhankar30/SimpleDictionary\">Github Repository link</a><br>" +
-                        "Dictionary API used: <a href=\"https://owlbot.info/\">Owlbot Info</a></p>" +
                         ""))
                 .show()
                 // Need to be called after show(), in order to generate hyperlinks
@@ -197,14 +172,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //Close database connection
     @Override
     public void onDestroy() {
         mDatabaseHelper.close();
         super.onDestroy();
     }
 
-
-
+    //customizable toast message
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
