@@ -8,7 +8,7 @@ Functioning:
 Just add the words you want to save in your own dictionary and view them later at any time you want.
 How to use instructions are given inside the application. 
 
-Development Tools and technologies:
+Development Tools and technologies:<br>
 Android Studio for development of application.<br>
 Volley API for making REST calls.<br>
 SQLite for creating Local Database.<br>
