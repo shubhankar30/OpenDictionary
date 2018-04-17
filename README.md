@@ -17,4 +17,5 @@ Owlbot(www.owlbot.info) is an open source online dictionary API.
 Future updates include:
 1. Showing the list of meaning on the homepage when you enter word for immediate use.
 2. Extending the app to Oxford Dictionary APIs to get better results.
+3. Adding search Feature to ListAdapter
 
