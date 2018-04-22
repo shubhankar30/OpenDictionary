@@ -145,7 +145,6 @@ public class ListDataActivity extends AppCompatActivity {
                         "<p>Scroll through your list to see any word you have added to your dictionary</p>" +
                         "<p>You can click on any word to have the option to delete it and see its example with the related meaning.</p><br>" +
                         "<br><br><br><br>" +
-                        "<p>Application repo at: <a href=\"http://www.github.com/shubhankar30/SimpleDictionary\">Github Repository link</a><br>" +
                         ""))
                 .show()
                 // Need to be called after show(), in order to generate hyperlinks

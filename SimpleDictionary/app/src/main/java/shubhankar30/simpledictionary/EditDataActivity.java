@@ -140,7 +140,6 @@ public class EditDataActivity extends AppCompatActivity{
                 "<p>To delete the word from your dictionary, press the delete word button given below. </p>" +
                 "<p>To just delete one single meaning from your dictionary, press the delete meaning button below.<br>" +
                 "<br><br><br><br>" +
-                "<p>Application repo at: <a href=\"http://www.github.com/shubhankar30/SimpleDictionary\">Github Repository link</a><br>" +
                 ""))
         .show()
         // Need to be called after show(), in order to generate hyperlinks
