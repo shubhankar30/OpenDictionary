@@ -8,7 +8,7 @@ Functioning:
 Just add the words you want to save in your own dictionary and view them later at any time you want.
 How to use instructions are given inside the application. 
 
-Development Tools and technologies:
+Development Tools and technologies:<br>
 Android Studio for development of application.<br>
 Volley API for making REST calls.<br>
 SQLite for creating Local Database.<br>
@@ -17,4 +17,5 @@ Owlbot(www.owlbot.info) is an open source online dictionary API.
 Future updates include:
 1. Showing the list of meaning on the homepage when you enter word for immediate use.
 2. Extending the app to Oxford Dictionary APIs to get better results.
+3. Adding search Feature to ListAdapter
 
