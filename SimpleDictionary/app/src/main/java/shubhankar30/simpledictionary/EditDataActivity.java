@@ -127,7 +127,6 @@ public class EditDataActivity extends AppCompatActivity{
             finish();
         } else {
             createInformationDialog();
-
         }
         return super.onOptionsItemSelected(item);
     }

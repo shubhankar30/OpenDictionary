@@ -91,8 +91,6 @@ public class ListDataActivity extends AppCompatActivity {
 
     //Fill the ListView with items
     private void populateListView() {
-        Log.d(TAG, "populateListView: Displaying data in ListView");//Debug
-
         wordList = new ArrayList<>();
         Cursor data = mDatabaseHelper.getData();
         int numRows = data.getCount();
@@ -100,7 +98,8 @@ public class ListDataActivity extends AppCompatActivity {
             toastMessage("Nothing in database");
         } else {
             while (data.moveToNext()) { //Move to next Row
-                words = new WordList(data.getString(1), data.getString(2), data.getString(4)); //COLUMN 1 contains words, COLUMN 2 contains meanings
+                //COLUMN 1 contains words, COLUMN 2 contains meanings, COLUMN 4 contains examples
+                words = new WordList(data.getString(1), data.getString(2), data.getString(4));
                 wordList.add(words);
             }
             CustomAdapter adapter = new CustomAdapter(this, R.layout.custom_list_adapter, wordList);
@@ -117,7 +116,7 @@ public class ListDataActivity extends AppCompatActivity {
                     meaning = meaning.replaceAll("'", "''");
                 }
 
-                Log.d(TAG, "onItemClick: You clicked" + meaning); //Debug
+                //Log.d(TAG, "onItemClick: You clicked" + meaning); //Debug
 
                 Cursor data = mDatabaseHelper.getItemId(meaning);
                 int itemId = -1;
@@ -125,7 +124,7 @@ public class ListDataActivity extends AppCompatActivity {
                     itemId = data.getInt(0);
                 }
                 if(itemId > -1){
-                    Log.d(TAG, "onItemClick: ID is : " + itemId);//Debug
+                    //Log.d(TAG, "onItemClick: ID is : " + itemId);//Debug
                     Intent editScreenIntent = new Intent(ListDataActivity.this, EditDataActivity.class);
                     editScreenIntent.putExtra("meaning", meaning); //To send meaning of row to EditDataActivity
                     startActivity(editScreenIntent);

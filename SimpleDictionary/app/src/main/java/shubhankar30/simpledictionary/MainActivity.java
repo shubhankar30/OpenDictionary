@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
                                 exampleOfWord = currentJsonObj.getString("example");    //Get example from REST response
                                 typeOfWord = currentJsonObj.getString("type");
 
-                                Log.e("Checking meaning",meaningOfWord); //Debug
-                                Log.e("Rest Response:", response.toString());//Debug
+                                //Log.e("Checking meaning",meaningOfWord); //Debug
+                                //Log.e("Rest Response:", response.toString());//Debug
 
                                 //Database add function call
                                 addRow(data, meaningOfWord, exampleOfWord, typeOfWord);
@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Rest Response:",error.toString());//Debug
                         toastMessage("Please enter a valid word");
                     }
                 }
@@ -131,10 +130,11 @@ public class MainActivity extends AppCompatActivity {
     public void addRow(String word, String meaning, String example, String type){
         boolean success = mDatabaseHelper.addRow(word, meaning, example, type);
 
+        //Condition to check if row was successfully added to database
         if(success) {
-            Log.e("ROW ADDED", "SUCCESSFULLY"); //Debug
+            //Log.e("ROW ADDED", "SUCCESSFULLY"); //Debug
         }else {
-            Log.e("ROW ADDED", "FAILED"); //Debug
+            //Log.e("ROW ADDED", "FAILED"); //Debug
         }
     }
 
@@ -154,8 +154,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Create App Info Dialogue
     private void createInformationDialog(){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-
         ((TextView) new AlertDialog.Builder(this)
                 .setTitle("Info")
                 .setIcon(android.R.drawable.ic_menu_info_details)
@@ -170,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
                 .findViewById(android.R.id.message))
                 .setMovementMethod(LinkMovementMethod.getInstance());
     }
-
 
     //Close database connection
     @Override

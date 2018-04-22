@@ -92,7 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //TO GET ROW ID FROM MEANING from ListDataActivity
     public Cursor getItemId(String name){
         SQLiteDatabase db = this.getWritableDatabase();
-        Log.d("The current db call:", name);
+        //Log.d("The current db call:", name);
 
         String query = "SELECT " + COL1 + " FROM " + TABLE_NAME +
                 " WHERE " + COL3 + " = '" + name + "'";
@@ -120,7 +120,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor data = db.rawQuery(query, null);
         return data;
     }
-
-
-
 }
