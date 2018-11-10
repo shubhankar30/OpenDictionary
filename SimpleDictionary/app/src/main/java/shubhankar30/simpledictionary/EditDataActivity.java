@@ -1,5 +1,6 @@
 package shubhankar30.simpledictionary;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -134,6 +135,12 @@ public class EditDataActivity extends AppCompatActivity{
     private void createInformationDialog(){
     ((TextView) new AlertDialog.Builder(this)
         .setTitle("Info")
+        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        })
         .setIcon(android.R.drawable.ic_menu_info_details)
         .setMessage(Html.fromHtml("" +
                 "<p>You can see the example for the respective word for the context meaning that you have selected.</p> " +

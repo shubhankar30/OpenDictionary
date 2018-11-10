@@ -1,5 +1,6 @@
 package shubhankar30.simpledictionary;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -7,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.ic_launcher);
-        actionBar.setTitle( "Simple Dictionary");
+        actionBar.setTitle( "Open Dictionary");
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,7 +157,13 @@ public class MainActivity extends AppCompatActivity {
         ((TextView) new AlertDialog.Builder(this)
                 .setTitle("Info")
                 .setIcon(android.R.drawable.ic_menu_info_details)
-                .setMessage(Html.fromHtml("This application is mainly designed to be an on-the-go dictionary with simplistic design and an open source documentation." +
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setMessage(Html.fromHtml("This application is mainly designed to be an on-the-go dictionary with simplistic design and an open source mindset with contribution and documentation made by the public." +
                         "<p>Just type in the required word in the provided box and click add word. This will add the word in your Simple Dictionary</p> " +
                         "<p>Click view list to see the meanings of all the words you have saved in your own dictionary. </p><br>" +
                         "<br><br><br><br>" +

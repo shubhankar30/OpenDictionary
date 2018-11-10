@@ -1,5 +1,6 @@
 package shubhankar30.simpledictionary;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -10,7 +11,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -140,7 +140,12 @@ public class ListDataActivity extends AppCompatActivity {
     private void createInformationDialog(){
         ((TextView) new AlertDialog.Builder(this)
                 .setTitle("Info")
-                .setIcon(android.R.drawable.ic_menu_info_details)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })                .setIcon(android.R.drawable.ic_menu_info_details)
                 .setMessage(Html.fromHtml("" +
                         "<p>Scroll through your list to see any word you have added to your dictionary</p>" +
                         "<p>You can click on any word to have the option to delete it and see its example with the related meaning.</p><br>" +
