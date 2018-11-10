@@ -130,12 +130,12 @@ public class MainActivity extends AppCompatActivity {
     public void addRow(String word, String meaning, String example, String type){
         boolean success = mDatabaseHelper.addRow(word, meaning, example, type);
 
-        //Condition to check if row was successfully added to database
+        /*//Condition to check if row was successfully added to database
         if(success) {
             //Log.e("ROW ADDED", "SUCCESSFULLY"); //Debug
         }else {
             //Log.e("ROW ADDED", "FAILED"); //Debug
-        }
+        }*/
     }
 
     //Create Menu items in toolbar
