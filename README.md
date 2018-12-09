@@ -1,6 +1,8 @@
 # OpenDictionary
 This is an application for a simplistic on-the-go dictionary. 
 
+[Playstore Link](https://play.google.com/store/apps/details?id=shubhankar30.opendictionary)
+
 **Purpose:**
 I made this application out of need because I needed something like this. To quickly add words and check them later without too much effort. Other applications have a cluttered interface where I have to bookmark words or star them in order to store them which is unnecessary. I have to read the meaning again for the next few days to remember it. So, instead of just looking at it once, I needed to store them locally.
 
