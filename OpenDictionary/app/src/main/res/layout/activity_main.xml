@@ -51,16 +51,16 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="119dp"
+        android:layout_width="224dp"
         android:layout_height="44dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
         android:text="Enter word"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.812"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
