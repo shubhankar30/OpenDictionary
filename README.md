@@ -1,6 +1,8 @@
 # OpenDictionary
 This is an application for a simplistic on-the-go dictionary. 
 
+![CodeFactor](https://www.codefactor.io/repository/github/shubhankar30/opendictionary/badge/master)
+
 [Playstore Link](https://play.google.com/store/apps/details?id=shubhankar30.opendictionary)
 
 **Purpose:**
