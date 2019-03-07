@@ -1,7 +1,7 @@
 # OpenDictionary
 This is an application for a simplistic on-the-go dictionary. 
 
-[![HitCount](http://hits.dwyl.io/shubhankar30/OpenDictionary.svg)](http://hits.dwyl.io/shubhankar30/OpenDictionary) ![CodeFactor](https://www.codefactor.io/repository/github/shubhankar30/opendictionary/badge/master) [![Known Vulnerabilities](https://snyk.io/test/github/shubhankar30/OpenDictionary/badge.svg?targetFile=OpenDictionary%2Fapp%2Fbuild.gradle)](https://snyk.io/test/github/shubhankar30/OpenDictionary?targetFile=OpenDictionary%2Fapp%2Fbuild.gradle) 
+![CodeFactor](https://www.codefactor.io/repository/github/shubhankar30/opendictionary/badge/master) [![Known Vulnerabilities](https://snyk.io/test/github/shubhankar30/OpenDictionary/badge.svg?targetFile=OpenDictionary%2Fapp%2Fbuild.gradle)](https://snyk.io/test/github/shubhankar30/OpenDictionary?targetFile=OpenDictionary%2Fapp%2Fbuild.gradle) 
 
 
 
