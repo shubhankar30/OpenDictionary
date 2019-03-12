@@ -1,5 +1,5 @@
 # OpenDictionary
-This is an application for a simplistic on-the-go dictionary. 
+This is an application for a simplistic on-the-go dictionary. Primarily made this for learning Android application development. Feel free to contribute if you wish to! 
 
 ![CodeFactor](https://www.codefactor.io/repository/github/shubhankar30/opendictionary/badge/master) [![Known Vulnerabilities](https://snyk.io/test/github/shubhankar30/OpenDictionary/badge.svg?targetFile=OpenDictionary%2Fapp%2Fbuild.gradle)](https://snyk.io/test/github/shubhankar30/OpenDictionary?targetFile=OpenDictionary%2Fapp%2Fbuild.gradle) 
 
